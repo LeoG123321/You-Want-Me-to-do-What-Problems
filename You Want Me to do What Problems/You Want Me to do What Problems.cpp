@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 int main()
@@ -63,8 +64,12 @@ int main()
     int num1{ 0 }, num2{ 0 };
 
     for (int i = 0; i < numbers1.size(); i++) {
-
+        num1 += numbers1[i] * pow(10, numbers1.size() - i - 1);
     }
 
+    cout << "\nCheckpoint 3: " << endl;
+    cout << "Num1: ";
+    cout << num1;
+    
 }
 
