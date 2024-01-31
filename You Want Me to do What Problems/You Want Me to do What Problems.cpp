@@ -9,7 +9,9 @@
 #include <cmath>
 using namespace std;
 
-void grabNumbers(string, vector<char>, vector<char>);
+void grabNumbers(string, vector<char>&, vector<char>&);
+vector<int> charToInt(vector<char>);
+int vectorToInt(vector<int>);
 
 int main()
 {
@@ -37,11 +39,7 @@ int main()
     }
     cout << endl;
 
-    vector<int> numbers1;
-
-    for (int i = 0; i < group1.size(); i++){
-        numbers1.push_back(group1[i] - 48);
-    }
+    vector<int> numbers1 = charToInt(group1);
 
     cout << "\nCheckpoint 2: " << endl;
     cout << "Group1: ";
@@ -49,11 +47,7 @@ int main()
         cout << group1[i];
     }
 
-    int num1{ 0 }, num2{ 0 };
-
-    for (int i = 0; i < numbers1.size(); i++) {
-        num1 += numbers1[i] * pow(10, numbers1.size() - i - 1);
-    }
+    int num1{vectorToInt(numbers1)}, num2{0};
 
     cout << "\nCheckpoint 3: " << endl;
     cout << "Num1: ";
@@ -61,7 +55,7 @@ int main()
     
 }
 
-void grabNumbers(string values, vector<char> &group1, vector<char> &&group2) {
+void grabNumbers(string values, vector<char> &group1, vector<char> &group2) {
     bool flag = true;
     for (int i = 1; i < values.size(); i++) {
         if (flag) {
@@ -77,4 +71,20 @@ void grabNumbers(string values, vector<char> &group1, vector<char> &&group2) {
         }
 
     }
+}
+
+vector<int> charToInt(vector<char> group) {
+    vector<int> holder;
+    for (int i = 0; i < group.size(); i++) {
+        holder.push_back(group[i] - 48);
+    }
+    return holder;
+}
+
+int vectorToInt(vector<int> numbers) {
+    int num{ 0 };
+    for (int i = 0; i < numbers.size(); i++) {
+        num += numbers[i] * pow(10, numbers.size() - i - 1);
+    }
+    return num;
 }
