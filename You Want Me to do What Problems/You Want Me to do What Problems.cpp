@@ -36,6 +36,7 @@ int main()
         
     }
 
+    cout << "\n Checkpoint 1: " << endl;
     cout << "Type: " << letter << endl;
     cout << "Num1: " << num1 << endl;
     cout << "Num2: " << num2 << endl;
