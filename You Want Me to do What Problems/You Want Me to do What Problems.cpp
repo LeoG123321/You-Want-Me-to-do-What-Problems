@@ -27,8 +27,8 @@ int main()
 
     grabNumbers(assign, group1, group2);
 
-    cout << "\n Checkpoint 1: " << endl;
-    cout << "Type: " << letter << endl;
+    cout << "\nGrabing Numbers Test: " << endl;
+    cout << "Letter: " << letter << endl;
     cout << "Group1: ";
     for (int i = 0; i < group1.size(); i++) {
         cout << group1[i];
@@ -40,18 +40,26 @@ int main()
     cout << endl;
 
     vector<int> numbers1 = charToInt(group1);
+    vector<int> numbers2 = charToInt(group2);
 
-    cout << "\nCheckpoint 2: " << endl;
-    cout << "Group1: ";
-    for (int i = 0; i < group1.size(); i++) {
-        cout << group1[i];
+    cout << "\nVector Characters To Vector Integers Test: " << endl;
+    cout << "Numbers1: ";
+    for (int i = 0; i < numbers1.size(); i++) {
+        cout << numbers1[i];
+    }
+    cout << "\nNumbers2: ";
+    for (int i = 0; i < numbers2.size(); i++) {
+        cout << numbers2[i];
     }
 
-    int num1{vectorToInt(numbers1)}, num2{0};
+    int small = vectorToInt(numbers1);
+    int large = vectorToInt(numbers2);
 
-    cout << "\nCheckpoint 3: " << endl;
+    cout << "\n\nVector Integers to Integer Test: " << endl;
     cout << "Num1: ";
-    cout << num1;
+    cout << small << endl;
+    cout << "Num2: ";
+    cout << large << endl;
     
 }
 
