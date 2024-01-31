@@ -9,6 +9,8 @@
 #include <cmath>
 using namespace std;
 
+void grabNumbers(string, vector<char>, vector<char>);
+
 int main()
 {
     string assign;
@@ -21,21 +23,7 @@ int main()
 
     letter = assign[0];
 
-    for (int i = 1; i < assign.size(); i++) {
-        
-        if (flag) {
-            if (assign[i] != '-') {
-                group1.push_back(assign[i]);
-            }
-            else {
-                flag = false;
-            }
-        }
-        else {
-            group2.push_back(assign[i]);
-        }
-        
-    }
+    grabNumbers(assign, group1, group2);
 
     cout << "\n Checkpoint 1: " << endl;
     cout << "Type: " << letter << endl;
@@ -73,3 +61,20 @@ int main()
     
 }
 
+void grabNumbers(string values, vector<char> &group1, vector<char> &&group2) {
+    bool flag = true;
+    for (int i = 1; i < values.size(); i++) {
+        if (flag) {
+            if (values[i] != '-') {
+                group1.push_back(values[i]);
+            }
+            else {
+                flag = false;
+            }
+        }
+        else {
+            group2.push_back(values[i]);
+        }
+
+    }
+}
