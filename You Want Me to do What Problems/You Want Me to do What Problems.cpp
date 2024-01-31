@@ -12,7 +12,7 @@ int main()
 {
     string assign;
     char letter;
-    string num1{ "" }, num2{ "" };
+    vector<char> group1, group2;
     bool flag = true;
 
     cout << "Please enter the assignment: ";
@@ -24,24 +24,47 @@ int main()
         
         if (flag) {
             if (assign[i] != '-') {
-                num1 += assign[i];
+                group1.push_back(assign[i]);
             }
             else {
                 flag = false;
             }
         }
         else {
-            num2 += assign[i];
+            group2.push_back(assign[i]);
         }
         
     }
 
     cout << "\n Checkpoint 1: " << endl;
     cout << "Type: " << letter << endl;
-    cout << "Num1: " << num1 << endl;
-    cout << "Num2: " << num2 << endl;
+    cout << "Group1: ";
+    for (int i = 0; i < group1.size(); i++) {
+        cout << group1[i];
+    }
+    cout << "\nGroup2: ";
+    for (int i = 0; i < group2.size(); i++) {
+        cout << group2[i];
+    }
+    cout << endl;
 
+    vector<int> numbers1;
 
+    for (int i = 0; i < group1.size(); i++){
+        numbers1.push_back(group1[i] - 48);
+    }
+
+    cout << "\nCheckpoint 2: " << endl;
+    cout << "Group1: ";
+    for (int i = 0; i < group1.size(); i++) {
+        cout << group1[i];
+    }
+
+    int num1{ 0 }, num2{ 0 };
+
+    for (int i = 0; i < numbers1.size(); i++) {
+
+    }
 
 }
 
