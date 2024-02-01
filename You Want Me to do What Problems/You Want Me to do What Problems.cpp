@@ -14,6 +14,7 @@ vector<int> charToInt(vector<char>);
 int vectorToInt(vector<int>);
 void doProblems(int, int, vector<int>&);
 void printProblems(vector<int>, char);
+void sort(vector<int>);
 
 int main()
 {
@@ -121,5 +122,18 @@ void printProblems(vector<int> problems, char letter) {
             cout << problems[i] << ", ";
         }
         cout << "and " << problems[problems.size() - 1] << " of " << letter << "." << endl;
+    }
+}
+
+void sort(vector<int> problems) {
+    int temp;
+    for (int i = 0; i < problems.size(); i++) {
+        for (int j = 0; j < problems.size(); j++) {
+            if (problems[j] > problems[j + 1]) {
+                temp = problems[j];
+                problems[j] = problems[j + 1];
+                problems[j + 1] = temp;
+            }
+        }
     }
 }
