@@ -19,12 +19,13 @@ void sort(vector<int>);
 
 int main()
 {
-    string assign;
+    string assign;  //assignments
     vector<string> sets;
     char letter;
     vector<char> group1, group2;
-    bool flag = true;
+    vector<vector<char>> groups1, groups2;
     vector<int> problems;
+    int loop;
 
     cout << "Please enter the assignment: ";
     cin >> assign;
@@ -32,6 +33,10 @@ int main()
     letter = assign[0];
 
     grabSets(assign, sets);
+
+    loop = sets.size();
+
+    
 
     grabNumbers(sets[0], group1, group2);
 
