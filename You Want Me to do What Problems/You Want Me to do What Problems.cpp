@@ -12,6 +12,8 @@ using namespace std;
 void grabNumbers(string, vector<char>&, vector<char>&);
 vector<int> charToInt(vector<char>);
 int vectorToInt(vector<int>);
+void doProblems(int, int, vector<int>&);
+void printProblems(vector<int>, char);
 
 int main()
 {
@@ -19,6 +21,7 @@ int main()
     char letter;
     vector<char> group1, group2;
     bool flag = true;
+    vector<int> problems;
 
     cout << "Please enter the assignment: ";
     cin >> assign;
@@ -55,12 +58,17 @@ int main()
     int small = vectorToInt(numbers1);
     int large = vectorToInt(numbers2);
 
-    cout << "\n\nVector Integers to Integer Test: " << endl;
+    cout << "\nVector Integers to Integer Test: " << endl;
     cout << "Num1: ";
     cout << small << endl;
     cout << "Num2: ";
     cout << large << endl;
     
+    doProblems(small, large, problems);
+
+    cout << "\n\nPrinting out First set of problems: " << endl;
+    printProblems(problems, letter);
+
 }
 
 void grabNumbers(string values, vector<char> &group1, vector<char> &group2) {
@@ -95,4 +103,23 @@ int vectorToInt(vector<int> numbers) {
         num += numbers[i] * pow(10, numbers.size() - i - 1);
     }
     return num;
+}
+
+void doProblems(int small, int large, vector<int> &problems) {
+    for (int i = small; i <= large; i++) {
+        problems.push_back(i);
+    }
+}
+
+void printProblems(vector<int> problems, char letter) {
+    if (problems.size() == 1) {
+        cout << "Do problem " << problems[0] << " of " << letter << "." << endl;
+    }
+    else {
+        cout << "Do problems ";
+        for (int i = 0; i < problems.size() - 1; i++) {
+            cout << problems[i] << ", ";
+        }
+        cout << "and " << problems[problems.size() - 1] << " of " << letter << "." << endl;
+    }
 }
