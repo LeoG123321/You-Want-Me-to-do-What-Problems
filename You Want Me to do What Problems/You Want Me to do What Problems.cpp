@@ -9,6 +9,7 @@
 #include <cmath>
 using namespace std;
 
+void grabSets(string, vector<string>&);
 void grabNumbers(string, vector<char>&, vector<char>&);
 vector<int> charToInt(vector<char>);
 int vectorToInt(vector<int>);
@@ -19,6 +20,7 @@ void sort(vector<int>);
 int main()
 {
     string assign;
+    vector<string> sets;
     char letter;
     vector<char> group1, group2;
     bool flag = true;
@@ -29,7 +31,9 @@ int main()
 
     letter = assign[0];
 
-    grabNumbers(assign, group1, group2);
+    grabSets(assign, sets);
+
+    grabNumbers(sets[0], group1, group2);
 
     cout << "\nGrabing Numbers Test: " << endl;
     cout << "Letter: " << letter << endl;
@@ -72,9 +76,22 @@ int main()
 
 }
 
+void grabSets(string assign, vector<string> &sets) {
+    bool flag = true;
+    string temp = "";
+    for (int i = 1; i < assign.size(); i++) {
+        if (assign[i] != ',') {
+            temp += assign[i];
+        }
+        else {
+            sets.push_back(temp);
+        }
+    }
+}
+
 void grabNumbers(string values, vector<char> &group1, vector<char> &group2) {
     bool flag = true;
-    for (int i = 1; i < values.size(); i++) {
+    for (int i = 0; i < values.size(); i++) {
         if (flag) {
             if (values[i] != '-') {
                 group1.push_back(values[i]);
