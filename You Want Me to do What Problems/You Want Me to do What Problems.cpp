@@ -16,65 +16,77 @@ int vectorToInt(vector<int>);
 void doProblems(int, int, vector<int>&);
 void printProblems(vector<int>, char);
 void sort(vector<int>);
+void clearChar(vector<char>&);
 
 int main()
 {
     string assign;  //assignments
     vector<string> sets;
     char letter;
-    vector<char> group1, group2;
-    vector<vector<char>> groups1, groups2;
+    vector<char> group1{ 'a' }, group2{ 'a' };
     vector<int> problems;
     int loop;
+    string holder;
 
     cout << "Please enter the assignment: ";
     cin >> assign;
 
     letter = assign[0];
-
     grabSets(assign, sets);
-
+   
     loop = sets.size();
 
+    cout << "sets: ";
+    for (int i = 0; i < sets.size(); i++) {
+        cout << sets[i];
+    }
+
+    for (int j = 0; j < loop; j++) {
+        clearChar(group1);
+        clearChar(group2);
+
+        holder = sets[j];
+
+        grabNumbers(holder, group1, group2);
+
+        cout << "\nGrabing Numbers Test: " << endl;
+        cout << "Letter: " << letter << endl;
+        cout << "Group1: ";
+        for (int i = 0; i < group1.size(); i++) {
+            cout << group1[i];
+        }
+        cout << "\nGroup2: ";
+        for (int i = 0; i < group2.size(); i++) {
+            cout << group2[i];
+        }
+        cout << endl;
+
+        vector<int> numbers1 = charToInt(group1);
+        vector<int> numbers2 = charToInt(group2);
+
+        cout << "\nVector Characters To Vector Integers Test: " << endl;
+        cout << "Numbers1: ";
+        for (int i = 0; i < numbers1.size(); i++) {
+            cout << numbers1[i];
+        }
+        cout << "\nNumbers2: ";
+        for (int i = 0; i < numbers2.size(); i++) {
+            cout << numbers2[i];
+        }
+
+        int small = vectorToInt(numbers1);
+        int large = vectorToInt(numbers2);
+
+        cout << "\nVector Integers to Integer Test: " << endl;
+        cout << "Num1: ";
+        cout << small << endl;
+        cout << "Num2: ";
+        cout << large << endl;
+
+        doProblems(small, large, problems);
+    }
+
     
-
-    grabNumbers(sets[0], group1, group2);
-
-    cout << "\nGrabing Numbers Test: " << endl;
-    cout << "Letter: " << letter << endl;
-    cout << "Group1: ";
-    for (int i = 0; i < group1.size(); i++) {
-        cout << group1[i];
-    }
-    cout << "\nGroup2: ";
-    for (int i = 0; i < group2.size(); i++) {
-        cout << group2[i];
-    }
-    cout << endl;
-
-    vector<int> numbers1 = charToInt(group1);
-    vector<int> numbers2 = charToInt(group2);
-
-    cout << "\nVector Characters To Vector Integers Test: " << endl;
-    cout << "Numbers1: ";
-    for (int i = 0; i < numbers1.size(); i++) {
-        cout << numbers1[i];
-    }
-    cout << "\nNumbers2: ";
-    for (int i = 0; i < numbers2.size(); i++) {
-        cout << numbers2[i];
-    }
-
-    int small = vectorToInt(numbers1);
-    int large = vectorToInt(numbers2);
-
-    cout << "\nVector Integers to Integer Test: " << endl;
-    cout << "Num1: ";
-    cout << small << endl;
-    cout << "Num2: ";
-    cout << large << endl;
-    
-    doProblems(small, large, problems);
 
     cout << "\n\nPrinting out First set of problems: " << endl;
     printProblems(problems, letter);
@@ -92,10 +104,12 @@ void grabSets(string assign, vector<string> &sets) {
             sets.push_back(temp);
         }
     }
+    sets.push_back(temp);
 }
 
 void grabNumbers(string values, vector<char> &group1, vector<char> &group2) {
     bool flag = true;
+
     for (int i = 0; i < values.size(); i++) {
         if (flag) {
             if (values[i] != '-') {
@@ -108,7 +122,6 @@ void grabNumbers(string values, vector<char> &group1, vector<char> &group2) {
         else {
             group2.push_back(values[i]);
         }
-
     }
 }
 
@@ -157,5 +170,12 @@ void sort(vector<int> problems) {
                 problems[j + 1] = temp;
             }
         }
+    }
+}
+
+void clearChar(vector<char>& clear) {
+    int num = clear.size();
+    for (int i = 0; i < num; i++) {
+        clear.pop_back();
     }
 }
