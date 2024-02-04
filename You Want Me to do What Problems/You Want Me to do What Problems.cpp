@@ -10,19 +10,19 @@
 #include <cmath>
 using namespace std;
 
-void problems();
-void problemsTest(string);
-void grabSets(string, vector<string>&);
-void grabNumbers(string, vector<char>&, vector<char>&);
-vector<int> charToInt(vector<char>);
-int vectorToInt(vector<int>);
-void doProblems(int, int, vector<int>&);
-void printProblems(vector<int>, char);
-void sort(vector<int>&);
-void clearChar(vector<char>&);
-void clearDup(vector<int>&);
-void clearSpace(string&);
-
+void problems();    //Prompts user to input assignments, outputs the list of assignemnts
+void problemsTest(string);  //Outputs the list of assignments called from the parameters
+void grabSets(string, vector<string>&); //Grabs the groups of numbers from the input and keeps them in sets
+void grabNumbers(string, vector<char>&, vector<char>&); //From a set, grab the first and second number into vector<char> variables
+vector<int> charToInt(vector<char>);    //Converts the numbers from vector<char> variables into vector<int> variables
+int vectorToInt(vector<int>);           //Converts the numbers from vector<int> variables into int variables
+void doProblems(int, int, vector<int>&);    //Creates the list of problems from the input
+void printProblems(vector<int>, char);  //Prints the problems the user needs to complete
+void sort(vector<int>&);        //Organizes numbers in ascending order
+void clearChar(vector<char>&);  //Clears the variables for a new set
+void clearDup(vector<int>&);    //Removes any duplicate numbers
+void clearSpace(string&);   //Clears any spaces in the input
+    
 int main()
 {
     string input;
