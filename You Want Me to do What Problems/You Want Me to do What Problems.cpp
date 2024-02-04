@@ -2,11 +2,6 @@
     Leonardo Gonzalez   1/30/24
 
     Week 3              You Want Me to do What Problems
-
-    //To-Do:
-    allow for single input assignments
-    impliment everything into a single function call
-    move everything into functions.cpp
 */
 
 #include <iostream>
@@ -15,6 +10,8 @@
 #include <cmath>
 using namespace std;
 
+void problems();
+void problemsTest(string);
 void grabSets(string, vector<string>&);
 void grabNumbers(string, vector<char>&, vector<char>&);
 vector<int> charToInt(vector<char>);
@@ -28,17 +25,49 @@ void clearSpace(string&);
 
 int main()
 {
-    string assign, holder;  //assignments
+    string input;
+
+    tests:
+    cout << "Run Tests? y/n" << endl;
+    cin >> input;
+    if (input == "y") {
+        problemsTest("L6");
+        problemsTest(" M 1 - 3 ");
+        problemsTest("N1,2,5");
+        problemsTest("P1-3,5");
+        problemsTest("Q1-3,5-7");
+        problemsTest("R1-1,3-3,5-8");
+        problemsTest("S4-5,1-3,7-10");
+        problemsTest("T4-5,1-3,7-10,8-12");
+    }
+    else if (input != "n") {
+        cout << "Invalid Input\n" << endl;
+        goto tests;
+    }
+
+    do {
+        problems();
+        problems:
+        cout << "\nEnter more Assignments? y/n" << endl;
+        cin >> input;
+        if (input != "n" && input != "y") {
+            cout << "Invalid Input\n" << endl;
+            goto problems;
+        }
+    } while (input == "y");
+
+    return 0;
+}
+
+void problemsTest(string assign) {
+    string holder;  //assignments
     int loop;
     char letter;
     vector<string> sets;
     vector<char> group1{ 'a' }, group2{ 'a' };
     vector<int> problems;
 
-    cout << "Please enter the assignment: ";
-    getline(cin, assign);
-
-    cout << "\n\nInput: " << assign << endl;
+    cout << "Input: " << assign << endl;
 
     clearSpace(assign);
     cout << "\n\nClear Space Test:" << endl;
@@ -47,7 +76,7 @@ int main()
     letter = assign[0];
 
     grabSets(assign, sets);
-   
+
     loop = sets.size();
 
     cout << "\nList of Sets: ";
@@ -108,8 +137,57 @@ int main()
 
     cout << "\n\nPrinting out First set of problems: " << endl;
     printProblems(problems, letter);
-
 }
+
+void problems() {
+    string assign, holder;  //assignments
+    int loop;
+    char letter;
+    vector<string> sets;
+    vector<char> group1{ 'a' }, group2{ 'a' };
+    vector<int> problems;
+
+    cout << "\nPlease enter the assignment: ";
+    
+    getline(cin, assign);
+    getline(cin, assign);
+
+
+    clearSpace(assign);
+
+    letter = assign[0];
+
+    grabSets(assign, sets);
+
+    loop = sets.size();
+
+    for (int j = 0; j < loop; j++) {
+        clearChar(group1);
+        clearChar(group2);
+
+        holder = sets[j];
+
+        grabNumbers(holder, group1, group2);
+
+        vector<int> numbers1 = charToInt(group1);
+        vector<int> numbers2 = charToInt(group2);
+
+        int small = vectorToInt(numbers1);
+        int large = vectorToInt(numbers2);
+
+        if (large == 0)
+            large = small;
+
+        doProblems(small, large, problems);
+    }
+
+    clearDup(problems);
+    sort(problems);
+
+    cout << "\n\nPrinting out First set of problems: " << endl;
+    printProblems(problems, letter);
+}
+
 
 void grabSets(string assign, vector<string> &sets) {
     bool flag = true;
@@ -223,10 +301,6 @@ void clearSpace(string& assign) {
     for (int i = 0; i < assign.size(); i++) {
         if (assign[i] != ' ') {
             temp += assign[i];
-            cout << "pass";
-        }
-        else {
-            cout << "failed";
         }
     }
     assign = temp;
