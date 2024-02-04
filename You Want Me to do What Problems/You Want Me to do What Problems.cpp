@@ -67,7 +67,7 @@ void problemsTest(string assign) {
     vector<char> group1{ 'a' }, group2{ 'a' };
     vector<int> problems;
 
-    cout << "Input: " << assign << endl;
+    cout << "\nInput: " << assign << endl;
 
     clearSpace(assign);
     cout << "\n\nClear Space Test:" << endl;
