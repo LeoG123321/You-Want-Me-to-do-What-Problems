@@ -4,8 +4,6 @@
     Week 3              You Want Me to do What Problems
 
     //To-Do:
-    Get rid of duplicated
-    allow for spaces to exist
     Wrap output
     allow for single input assignments
     impliment everything into a single function call
@@ -13,6 +11,7 @@
 */
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <cmath>
 using namespace std;
@@ -26,21 +25,28 @@ void printProblems(vector<int>, char);
 void sort(vector<int>&);
 void clearChar(vector<char>&);
 void clearDup(vector<int>&);
+void clearSpace(string&);
 
 int main()
 {
-    string assign;  //assignments
-    vector<string> sets;
+    string assign, holder;  //assignments
+    int loop;
     char letter;
+    vector<string> sets;
     vector<char> group1{ 'a' }, group2{ 'a' };
     vector<int> problems;
-    int loop;
-    string holder;
 
     cout << "Please enter the assignment: ";
-    cin >> assign;
+    getline(cin, assign);
+
+    cout << "\n\nInput: " << assign << endl;
+
+    clearSpace(assign);
+    cout << "\n\nClear Space Test:" << endl;
+    cout << assign << endl;
 
     letter = assign[0];
+
     grabSets(assign, sets);
    
     loop = sets.size();
@@ -107,12 +113,14 @@ void grabSets(string assign, vector<string> &sets) {
     bool flag = true;
     string temp = "";
     for (int i = 1; i < assign.size(); i++) {
-        if (assign[i] != ',') {
-            temp += assign[i];
-        }
-        else {
-            sets.push_back(temp);
-            temp = "";
+        if (assign[i] != ' ') {
+            if (assign[i] != ',') {
+                temp += assign[i];
+            }
+            else {
+                sets.push_back(temp);
+                temp = "";
+            }
         }
     }
     sets.push_back(temp);
@@ -203,4 +211,18 @@ void clearDup(vector<int>& problems) {
             }
         }
     }
+}
+
+void clearSpace(string& assign) {
+    string temp = "";
+    for (int i = 0; i < assign.size(); i++) {
+        if (assign[i] != ' ') {
+            temp += assign[i];
+            cout << "pass";
+        }
+        else {
+            cout << "failed";
+        }
+    }
+    assign = temp;
 }
