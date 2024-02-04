@@ -5,40 +5,83 @@
 */
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <cmath>
 using namespace std;
 
+void problems();
+void problemsTest(string);
 void grabSets(string, vector<string>&);
 void grabNumbers(string, vector<char>&, vector<char>&);
 vector<int> charToInt(vector<char>);
 int vectorToInt(vector<int>);
 void doProblems(int, int, vector<int>&);
 void printProblems(vector<int>, char);
-void sort(vector<int>);
+void sort(vector<int>&);
 void clearChar(vector<char>&);
+void clearDup(vector<int>&);
+void clearSpace(string&);
 
 int main()
 {
-    string assign;  //assignments
-    vector<string> sets;
+    string input;
+
+    tests:
+    cout << "Run Tests? y/n" << endl;
+    cin >> input;
+    if (input == "y") {
+        problemsTest("L6");
+        problemsTest(" M 1 - 3 ");
+        problemsTest("N1,2,5");
+        problemsTest("P1-3,5");
+        problemsTest("Q1-3,5-7");
+        problemsTest("R1-1,3-3,5-8");
+        problemsTest("S4-5,1-3,7-10");
+        problemsTest("T4-5,1-3,7-10,8-12");
+    }
+    else if (input != "n") {
+        cout << "Invalid Input\n" << endl;
+        goto tests;
+    }
+
+    do {
+        problems();
+        problems:
+        cout << "\nEnter more Assignments? y/n" << endl;
+        cin >> input;
+        if (input != "n" && input != "y") {
+            cout << "Invalid Input\n" << endl;
+            goto problems;
+        }
+    } while (input == "y");
+
+    return 0;
+}
+
+void problemsTest(string assign) {
+    string holder;  //assignments
+    int loop;
     char letter;
+    vector<string> sets;
     vector<char> group1{ 'a' }, group2{ 'a' };
     vector<int> problems;
-    int loop;
-    string holder;
 
-    cout << "Please enter the assignment: ";
-    cin >> assign;
+    cout << "\nInput: " << assign << endl;
+
+    clearSpace(assign);
+    cout << "\n\nClear Space Test:" << endl;
+    cout << assign << endl;
 
     letter = assign[0];
+
     grabSets(assign, sets);
-   
+
     loop = sets.size();
 
-    cout << "sets: ";
+    cout << "\nList of Sets: ";
     for (int i = 0; i < sets.size(); i++) {
-        cout << sets[i];
+        cout << sets[i] << " ";
     }
 
     for (int j = 0; j < loop; j++) {
@@ -49,7 +92,7 @@ int main()
 
         grabNumbers(holder, group1, group2);
 
-        cout << "\nGrabing Numbers Test: " << endl;
+        cout << "\n\nGrabing Numbers Test: " << endl;
         cout << "Letter: " << letter << endl;
         cout << "Group1: ";
         for (int i = 0; i < group1.size(); i++) {
@@ -77,7 +120,10 @@ int main()
         int small = vectorToInt(numbers1);
         int large = vectorToInt(numbers2);
 
-        cout << "\nVector Integers to Integer Test: " << endl;
+        if (large == 0)
+            large = small;
+
+        cout << "\n\nVector Integers to Integer Test: " << endl;
         cout << "Num1: ";
         cout << small << endl;
         cout << "Num2: ";
@@ -86,22 +132,75 @@ int main()
         doProblems(small, large, problems);
     }
 
-    
+    clearDup(problems);
+    sort(problems);
 
     cout << "\n\nPrinting out First set of problems: " << endl;
     printProblems(problems, letter);
-
 }
+
+void problems() {
+    string assign, holder;  //assignments
+    int loop;
+    char letter;
+    vector<string> sets;
+    vector<char> group1{ 'a' }, group2{ 'a' };
+    vector<int> problems;
+
+    cout << "\nPlease enter the assignment: ";
+    
+    getline(cin, assign);
+    getline(cin, assign);
+
+
+    clearSpace(assign);
+
+    letter = assign[0];
+
+    grabSets(assign, sets);
+
+    loop = sets.size();
+
+    for (int j = 0; j < loop; j++) {
+        clearChar(group1);
+        clearChar(group2);
+
+        holder = sets[j];
+
+        grabNumbers(holder, group1, group2);
+
+        vector<int> numbers1 = charToInt(group1);
+        vector<int> numbers2 = charToInt(group2);
+
+        int small = vectorToInt(numbers1);
+        int large = vectorToInt(numbers2);
+
+        if (large == 0)
+            large = small;
+
+        doProblems(small, large, problems);
+    }
+
+    clearDup(problems);
+    sort(problems);
+
+    cout << "\n\nPrinting out First set of problems: " << endl;
+    printProblems(problems, letter);
+}
+
 
 void grabSets(string assign, vector<string> &sets) {
     bool flag = true;
     string temp = "";
     for (int i = 1; i < assign.size(); i++) {
-        if (assign[i] != ',') {
-            temp += assign[i];
-        }
-        else {
-            sets.push_back(temp);
+        if (assign[i] != ' ') {
+            if (assign[i] != ',') {
+                temp += assign[i];
+            }
+            else {
+                sets.push_back(temp);
+                temp = "";
+            }
         }
     }
     sets.push_back(temp);
@@ -155,15 +254,18 @@ void printProblems(vector<int> problems, char letter) {
         cout << "Do problems ";
         for (int i = 0; i < problems.size() - 1; i++) {
             cout << problems[i] << ", ";
+            if (i % 14 == 0 && i != 0) {
+                cout << endl;
+            }
         }
         cout << "and " << problems[problems.size() - 1] << " of " << letter << "." << endl;
     }
 }
 
-void sort(vector<int> problems) {
+void sort(vector<int>& problems) {
     int temp;
     for (int i = 0; i < problems.size(); i++) {
-        for (int j = 0; j < problems.size(); j++) {
+        for (int j = 0; j < problems.size() - 1; j++) {
             if (problems[j] > problems[j + 1]) {
                 temp = problems[j];
                 problems[j] = problems[j + 1];
@@ -178,4 +280,28 @@ void clearChar(vector<char>& clear) {
     for (int i = 0; i < num; i++) {
         clear.pop_back();
     }
+}
+
+void clearDup(vector<int>& problems) {
+    int temp;
+    for (int i = 0; i < problems.size(); i++) {
+        for (int j = 0; j < problems.size(); j++) {
+            if (problems[i] == problems[j] && i != j) {
+                temp = problems[j];
+                problems[j] = problems[problems.size() - 1];
+                problems[problems.size() - 1] = temp;
+                problems.pop_back();
+            }
+        }
+    }
+}
+
+void clearSpace(string& assign) {
+    string temp = "";
+    for (int i = 0; i < assign.size(); i++) {
+        if (assign[i] != ' ') {
+            temp += assign[i];
+        }
+    }
+    assign = temp;
 }
