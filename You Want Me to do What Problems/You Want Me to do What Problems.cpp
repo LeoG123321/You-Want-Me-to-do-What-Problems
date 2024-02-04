@@ -2,6 +2,14 @@
     Leonardo Gonzalez   1/30/24
 
     Week 3              You Want Me to do What Problems
+
+    //To-Do:
+    Get rid of duplicated
+    allow for spaces to exist
+    Wrap output
+    allow for single input assignments
+    impliment everything into a single function call
+    move everything into functions.cpp
 */
 
 #include <iostream>
@@ -17,6 +25,7 @@ void doProblems(int, int, vector<int>&);
 void printProblems(vector<int>, char);
 void sort(vector<int>&);
 void clearChar(vector<char>&);
+void clearDup(vector<int>&);
 
 int main()
 {
@@ -86,6 +95,7 @@ int main()
         doProblems(small, large, problems);
     }
 
+    clearDup(problems);
     sort(problems);
 
     cout << "\n\nPrinting out First set of problems: " << endl;
@@ -178,5 +188,19 @@ void clearChar(vector<char>& clear) {
     int num = clear.size();
     for (int i = 0; i < num; i++) {
         clear.pop_back();
+    }
+}
+
+void clearDup(vector<int>& problems) {
+    int temp;
+    for (int i = 0; i < problems.size(); i++) {
+        for (int j = 0; j < problems.size(); j++) {
+            if (problems[i] == problems[j] && i != j) {
+                temp = problems[j];
+                problems[j] = problems[problems.size() - 1];
+                problems[problems.size() - 1] = temp;
+                problems.pop_back();
+            }
+        }
     }
 }
