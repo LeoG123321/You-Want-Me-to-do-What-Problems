@@ -15,7 +15,7 @@ vector<int> charToInt(vector<char>);
 int vectorToInt(vector<int>);
 void doProblems(int, int, vector<int>&);
 void printProblems(vector<int>, char);
-void sort(vector<int>);
+void sort(vector<int>&);
 void clearChar(vector<char>&);
 
 int main()
@@ -36,9 +36,9 @@ int main()
    
     loop = sets.size();
 
-    cout << "sets: ";
+    cout << "\nList of Sets: ";
     for (int i = 0; i < sets.size(); i++) {
-        cout << sets[i];
+        cout << sets[i] << " ";
     }
 
     for (int j = 0; j < loop; j++) {
@@ -49,7 +49,7 @@ int main()
 
         grabNumbers(holder, group1, group2);
 
-        cout << "\nGrabing Numbers Test: " << endl;
+        cout << "\n\nGrabing Numbers Test: " << endl;
         cout << "Letter: " << letter << endl;
         cout << "Group1: ";
         for (int i = 0; i < group1.size(); i++) {
@@ -77,7 +77,7 @@ int main()
         int small = vectorToInt(numbers1);
         int large = vectorToInt(numbers2);
 
-        cout << "\nVector Integers to Integer Test: " << endl;
+        cout << "\n\nVector Integers to Integer Test: " << endl;
         cout << "Num1: ";
         cout << small << endl;
         cout << "Num2: ";
@@ -86,7 +86,7 @@ int main()
         doProblems(small, large, problems);
     }
 
-    
+    sort(problems);
 
     cout << "\n\nPrinting out First set of problems: " << endl;
     printProblems(problems, letter);
@@ -102,6 +102,7 @@ void grabSets(string assign, vector<string> &sets) {
         }
         else {
             sets.push_back(temp);
+            temp = "";
         }
     }
     sets.push_back(temp);
@@ -160,10 +161,10 @@ void printProblems(vector<int> problems, char letter) {
     }
 }
 
-void sort(vector<int> problems) {
+void sort(vector<int>& problems) {
     int temp;
     for (int i = 0; i < problems.size(); i++) {
-        for (int j = 0; j < problems.size(); j++) {
+        for (int j = 0; j < problems.size() - 1; j++) {
             if (problems[j] > problems[j + 1]) {
                 temp = problems[j];
                 problems[j] = problems[j + 1];
