@@ -4,7 +4,6 @@
     Week 3              You Want Me to do What Problems
 
     //To-Do:
-    Wrap output
     allow for single input assignments
     impliment everything into a single function call
     move everything into functions.cpp
@@ -174,6 +173,9 @@ void printProblems(vector<int> problems, char letter) {
         cout << "Do problems ";
         for (int i = 0; i < problems.size() - 1; i++) {
             cout << problems[i] << ", ";
+            if (i % 14 == 0 && i != 0) {
+                cout << endl;
+            }
         }
         cout << "and " << problems[problems.size() - 1] << " of " << letter << "." << endl;
     }
