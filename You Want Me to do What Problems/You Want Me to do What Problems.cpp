@@ -91,6 +91,9 @@ int main()
         int small = vectorToInt(numbers1);
         int large = vectorToInt(numbers2);
 
+        if (large == 0)
+            large = small;
+
         cout << "\n\nVector Integers to Integer Test: " << endl;
         cout << "Num1: ";
         cout << small << endl;
